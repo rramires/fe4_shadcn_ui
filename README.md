@@ -36,6 +36,49 @@ Gostei do mais puxado pro azul:
 Para resolver adicione a extensão de PostCSS no VSCode:  
 [PostCSS Language Support](https://marketplace.visualstudio.com/items?itemName=csstools.postcss)
 
-- Com isso os erros devem desaparecer.  
+- Com isso os erros devem desaparecer.
 
+3 - Vá até o arquivo **lib/utils.ts** e veja que tem alguns erros, devido ao plugins que instalamos para organizar os imports.
+Para resolver basta salvar o arquivo, que o plugin vai formatar.
 
+- Com isso esses erros devem desaparecer.
+
+---
+
+### Instalação de um component para teste
+
+1 - Para testar, instale um component, por exemplo o button:  
+[ui.shadcn/button](https://ui.shadcn.com/docs/components/button)
+
+```sh
+pnpm dlx shadcn@latest add button
+```
+
+- Perceba que foi criado uma pasta, **components** e dentro dela, outra **ui**, e um arquivo **button.tsx**, que é o botão, que acabou de ser instalado.
+- Essa é uma das maiores vantagens do Shadcn-UI. Trazer o código do component para dentro do projeto, podendo ser customizado se necessário.
+
+- Abrindo o **button.tsx**, veja os 2 erros na aba PROBLEMS. O primeiro é de organização dos imports.  
+   O segundo é na exportação do component que está assim **export { Button, buttonVariants }**.  
+  Para o Fast Refresh do React, o correto seria separar em 2 arquivos, um para o component **Button** e outro para **buttonVariants** e fazer a importação do buttonVariants em Button.  
+  Mas fica muito chato, fazer isso em cada component que instalarmos do Shadcn-UI. Então uma solução é desativar essa checagem.
+
+2 - Vamos sobrescrever algumas regras no **eslint.config.js**, para desativar as checagens dentro da pasta **components/ui**:
+
+```js
+// depois do array extends:[], adicione
+overrides: [
+    {
+        files: [
+            'src/components/ui/**/*.tsx',
+            'src/components/ui/**/*.ts',
+        ],
+        rules: {
+            'react-refresh/only-export-components': 'off',
+        },
+    },
+],
+```
+
+- Com isso esses erros devem desaparecer.
+
+---
