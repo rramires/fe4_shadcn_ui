@@ -60,7 +60,7 @@ pnpm dlx shadcn@latest add button
 - Abrindo o **button.tsx**, veja os 2 erros na aba PROBLEMS. O primeiro é de organização dos imports.  
    O segundo é na exportação do component que está assim **export { Button, buttonVariants }**.  
   Para o Fast Refresh do React, o correto seria separar em 2 arquivos, um para o component **Button** e outro para **buttonVariants** e fazer a importação do buttonVariants em Button.  
-  Mas fica muito chato, fazer isso em cada component que instalarmos do Shadcn-UI. Então uma solução é desativar essa checagem.
+  Mas fica muito trabalhoso, fazer isso em cada component que instalarmos do Shadcn-UI. Então uma solução é desativar essa checagem.
 
 2 - Vamos sobrescrever algumas regras no **eslint.config.js**, para desativar as checagens dentro da pasta **components/ui**:
 
@@ -82,3 +82,27 @@ overrides: [
 - Com isso esses erros devem desaparecer.
 
 ---
+
+### Uso do component
+
+1 - Adicione na página **dashboard.tsx**, um botão:
+
+```js
+// adicione
+import { Button } from '@/components/ui/button'
+```
+
+```js
+// adicione
+<Button variant='outline'>Teste</Button>
+```
+
+2 - Rode a aplicação:
+
+```sh
+pnpm dev
+```
+
+- Com isso a instalação e configuração de praticamente tudo para iniciar um projeto FrontEnd está concluída.
+- Bastando agora adicionar os components necessários:  
+  [Shadcn-UI Components](https://ui.shadcn.com/docs/components)
